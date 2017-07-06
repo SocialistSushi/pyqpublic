@@ -2,6 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 from urllib import urlencode
 
+from .Bag import Bag
+from .Parcel import Parcel
+
 class QPublic(object):
 	"""docstring for QPublic"""
 
@@ -49,14 +52,7 @@ class QPublic(object):
 
 		results = []
 		for row in soup.table.tbody.findAll('tr'):
-			tds = row.findAll('td')
-			results.append({
-				'parcelId': self.normalizeText(tds[1].text),
-				'alternateId': self.normalizeText(tds[2].text),
-				'owner': self.normalizeText(tds[3].text),
-				'propertyAddress': self.normalizeText(tds[4].text),
-				'legalDescription': self.normalizeText(tds[5].text)
-				})
+			results.append(Parcel(row))
 
 		return results
 

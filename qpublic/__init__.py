@@ -50,7 +50,6 @@ class QPublic(object):
 		results = []
 		for row in soup.table.tbody.findAll('tr'):
 			tds = row.findAll('td')
-			print tds[1].text
 			results.append({
 				'parcelId': self.normalizeText(tds[1].text),
 				'alternateId': self.normalizeText(tds[2].text),

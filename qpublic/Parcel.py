@@ -47,7 +47,7 @@ class Parcel(Bag):
 					elif title =='Owner':
 						subData = Bag()
 						subData.setValue('name', section.select('#ctlBodyPane_ctl01_ctl01_lnkOwnerName_lblSearch'))
-						address = section.select('#ctlBodyPane_ctl01_ctl01_lblAddress') ", " + section.select('#ctlBodyPane_ctl01_ctl01_lblCityStateZip')
+						address = section.select('#ctlBodyPane_ctl01_ctl01_lblAddress') + ", " + section.select('#ctlBodyPane_ctl01_ctl01_lblCityStateZip')
 						subData.setValue('address', address)
 
 						self.setValue('owner', subData)

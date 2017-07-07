@@ -51,8 +51,16 @@ class QPublic(object):
 		soup = self.post(self.searchParams(), args)
 
 		results = []
-		for row in soup.table.tbody.findAll('tr'):
-			results.append(Parcel(row))
+		# Maybe we found nothing
+		if soup.find('h3', 'No results match your search criteria.'):
+			pass
+		# Multiple results?
+		elif soup.find('span', text='Search Results'):
+			for row in soup.table.tbody.findAll('tr'):
+				results.append(Parcel(row))
+		else:
+			# try to parse as a single result
+			results = Parcel(soup)
 
 		return results
 
